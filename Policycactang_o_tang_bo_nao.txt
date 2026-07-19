@@ -1,7 +1,3 @@
-thanhtuan@orchestrator:/policy_tong$ ls
-policy-tier5.hcl  tier1-policy.hcl  tier2-policy.hcl  tier3-policy.hcl  tier4-policy.hcl
-thanhtuan@orchestrator:/policy_tong$ cat policy-tier1.hcl
-cat: policy-tier1.hcl: No such file or directory
 thanhtuan@orchestrator:/policy_tong$ cat tier1-policy.hcl
 path "database/creds/patients-mssql-role" {
   capabilities = ["read"]
@@ -28,8 +24,6 @@ path "secret/metadata/source-integrity/*" {
 path "secret/data/crypto/tier1-patient-file" {
   capabilities = ["read"]
 }
-thanhtuan@orchestrator:/policy_tong$ ls
-policy-tier5.hcl  tier1-policy.hcl  tier2-policy.hcl  tier3-policy.hcl  tier4-policy.hcl
 thanhtuan@orchestrator:/policy_tong$ cat tier1-policy.hcl
 path "database/creds/patients-mssql-role" {
   capabilities = ["read"]
