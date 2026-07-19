@@ -1,0 +1,173 @@
+thanhtuan@orchestrator:/policy_tong$ ls
+policy-tier5.hcl  tier1-policy.hcl  tier2-policy.hcl  tier3-policy.hcl  tier4-policy.hcl
+thanhtuan@orchestrator:/policy_tong$ cat policy-tier1.hcl
+cat: policy-tier1.hcl: No such file or directory
+thanhtuan@orchestrator:/policy_tong$ cat tier1-policy.hcl
+path "database/creds/patients-mssql-role" {
+  capabilities = ["read"]
+}
+
+path "secret/data/crypto/tier1-patient-file" {
+  capabilities = ["read"]
+}
+
+path "secret/data/backup-metadata/*" {
+  capabilities = ["create", "update", "read"]
+}
+
+path "secret/metadata/backup-metadata/*" {
+  capabilities = ["list", "read"]
+}
+path "secret/data/source-integrity/*" {
+  capabilities = ["create", "update", "read"]
+}
+
+path "secret/metadata/source-integrity/*" {
+  capabilities = ["read", "list"]
+}
+path "secret/data/crypto/tier1-patient-file" {
+  capabilities = ["read"]
+}
+thanhtuan@orchestrator:/policy_tong$ ls
+policy-tier5.hcl  tier1-policy.hcl  tier2-policy.hcl  tier3-policy.hcl  tier4-policy.hcl
+thanhtuan@orchestrator:/policy_tong$ cat tier1-policy.hcl
+path "database/creds/patients-mssql-role" {
+  capabilities = ["read"]
+}
+
+path "secret/data/crypto/tier1-patient-file" {
+  capabilities = ["read"]
+}
+
+path "secret/data/backup-metadata/*" {
+  capabilities = ["create", "update", "read"]
+}
+
+path "secret/metadata/backup-metadata/*" {
+  capabilities = ["list", "read"]
+}
+path "secret/data/source-integrity/*" {
+  capabilities = ["create", "update", "read"]
+}
+
+path "secret/metadata/source-integrity/*" {
+  capabilities = ["read", "list"]
+}
+path "secret/data/crypto/tier1-patient-file" {
+  capabilities = ["read"]
+}
+thanhtuan@orchestrator:/policy_tong$ cat tier2-policy.hcl
+path "secret/data/backup-metadata/*" {
+  capabilities = ["read"]
+}
+
+path "secret/data/kopia/tier2" {
+  capabilities = ["read"]
+}
+
+path "secret/data/tier2-snapshot/*" {
+  capabilities = ["create", "update", "read"]
+}
+
+path "secret/data/tier2-control/mode" {
+  capabilities = ["read"]
+}
+
+path "secret/data/tier5-control/mode" {
+  capabilities = ["read"]
+}
+
+path "secret/data/tier5-emergency/*" {
+  capabilities = ["create", "update", "read"]
+}
+
+path "secret/data/tier5-delivery/*" {
+  capabilities = ["create", "update", "read"]
+}
+path "secret/data/crypto/tier1-patient-file" {
+  capabilities = ["read"]
+}
+thanhtuan@orchestrator:/policy_tong$ cat tier3-policy.hcl
+path "secret/data/kopia/tier4" {
+  capabilities = ["read"]
+}
+
+path "secret/data/tier4-control/*" {
+  capabilities = ["read"]
+}
+
+path "secret/data/tier4-promote/*" {
+  capabilities = ["create", "update", "read"]
+}
+thanhtuan@orchestrator:/policy_tong$ cat tier4-policy.hcl
+path "secret/data/kopia/tier4" {
+  capabilities = ["read"]
+}
+
+path "secret/data/tier4-control/*" {
+  capabilities = ["read"]
+}
+
+path "secret/data/tier4-promote/*" {
+  capabilities = ["create", "update", "read"]
+}
+
+path "secret/data/tier5-delivery/*" {
+  capabilities = ["create", "update", "read"]
+}
+
+path "secret/data/restore-control/*" {
+  capabilities = ["read"]
+}
+
+path "secret/data/restore-history/*" {
+  capabilities = ["create", "update", "read"]
+}
+thanhtuan@orchestrator:/policy_tong$ cat policy-tier5.hcl
+# Tier5 đọc lệnh riêng của nó
+path "secret/data/tier5-control/mode" {
+  capabilities = ["read"]
+}
+
+# Tier5 đọc marker delivery để biết dataset đã được giao chưa
+path "secret/data/tier5-delivery/*" {
+  capabilities = ["read", "list"]
+}
+
+# Tier5 đọc record promote/emergency do Tier2/Tier4 ghi
+path "secret/data/tier4-promote/*" {
+  capabilities = ["read", "list"]
+}
+
+path "secret/data/tier5-emergency/*" {
+  capabilities = ["read", "list"]
+}
+
+# Tier5 ghi kết quả accepted/rejected sau khi verify
+path "secret/data/tier5-accepted/*" {
+  capabilities = ["create", "update", "read", "list"]
+}
+
+path "secret/data/tier5-rejected/*" {
+  capabilities = ["create", "update", "read", "list"]
+}
+
+# Tier5 gửi trạng thái immutable lock nếu cần
+path "secret/data/tier5-locks/*" {
+  capabilities = ["create", "update", "read", "list"]
+}
+path "secret/data/restore-control/*" {
+  capabilities = ["read"]
+}
+
+path "secret/data/restore-history/*" {
+  capabilities = ["create", "update", "read"]
+}
+
+path "secret/data/tier5-locks/*" {
+  capabilities = ["create", "update", "read"]
+}
+
+path "secret/data/tier5-accepted/*" {
+  capabilities = ["create", "update", "read"]
+}
